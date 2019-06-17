@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace toDoApp.Models {
+    [Table("Donation_histories")]
     public class DonationHistory
     {
         [Key]

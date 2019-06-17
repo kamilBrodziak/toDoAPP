@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace toDoCharityApp.Repositories {
+namespace toDoApp.Repositories {
     public class PostgresRepository<T> : IRepository<T> where T : class {
         private DbContext _context;
         private DbSet<T> _dbSet;

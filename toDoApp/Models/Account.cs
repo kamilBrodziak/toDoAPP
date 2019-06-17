@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace toDoApp.Models
 {
+    [Table("Accounts")]
     public class Account
     {
         [Key]

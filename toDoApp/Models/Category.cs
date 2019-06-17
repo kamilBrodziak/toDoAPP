@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace toDoApp.Models
 {
+    [Table("Categories")]
     public class Category
     {
         [Key]

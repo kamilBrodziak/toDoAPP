@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace toDoCharityApp.Repositories
+namespace toDoApp.Repositories
 {
     public interface IRepository<T> : IDisposable where T : class
     {

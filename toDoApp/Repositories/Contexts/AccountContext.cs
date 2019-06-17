@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using toDoApp.Models;
 
-namespace toDoApp.Repositories.Contexts
-
+namespace toDoApp.Repositories.Contexts {
     public class AccountContext : DbContext {
         public DbSet<Account> Accounts { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
