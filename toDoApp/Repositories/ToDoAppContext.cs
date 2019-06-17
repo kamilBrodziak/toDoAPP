@@ -7,6 +7,7 @@ using toDoApp.Models;
 
 namespace toDoApp.Repositories {
     public class ToDoAppContext : DbContext {
+        public ToDoAppContext(DbContextOptions options) : base(options) { }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<CharityFundation> CharityFundations { get; set; }
@@ -55,7 +56,7 @@ namespace toDoApp.Repositories {
         }
 
         private void UserCreating(ModelBuilder modelBuilder) {
-            modelBuilder.Entity<User>().Property(u => u.Rank).HasDefaultValue(0);
+            //modelBuilder.Entity<User>().Property(u => u.Rank).HasDefaultValue(0);
         }
     }
 }
