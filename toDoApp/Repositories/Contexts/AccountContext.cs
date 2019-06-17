@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using toDoCharityApp.Models;
+using toDoApp.Models;
 
-namespace toDoCharityApp.Repositories.Contexts {
+namespace toDoApp.Repositories.Contexts
 
     public class AccountContext : DbContext {
         public DbSet<Account> Accounts { get; set; }

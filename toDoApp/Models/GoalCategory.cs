@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace toDoCharityApp.Models
-{
+namespace toDoApp.Models {
     public class GoalCategory
     {
         public int GoalId { get; set; }

@@ -3,10 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using toDoCharityApp.Models;
+using toDoApp.Models;
 
-namespace toDoCharityApp.Repositories.Contexts
-{
+namespace toDoApp.Repositories.Contexts {
     public class RankContext : DbContext
     {
         public DbSet<Rank> Ranks { get; set; }

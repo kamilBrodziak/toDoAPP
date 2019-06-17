@@ -3,12 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using toDoCharityApp.Models;
+using toDoApp.Models;
 
-namespace toDoCharityApp.Repositories.Contexts
+namespace toDoApp.Repositories.Contexts
 {
     public class GoalCategoryContext : DbContext
     {
         public DbSet<GoalCategory> GoalCategories { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<GoalCategory>().HasKey(gc => new { gc.GoalId, gc.CategoryId });
+        }
     }
 }

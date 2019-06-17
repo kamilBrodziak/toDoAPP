@@ -5,8 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace toDoCharityApp.Models
-{
+namespace toDoApp.Models {
     public class Privilage
     {
         [Key]

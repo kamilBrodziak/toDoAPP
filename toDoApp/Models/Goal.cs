@@ -5,8 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace toDoCharityApp.Models
-{
+namespace toDoApp.Models {
     public class Goal
     {
         [Key]
@@ -18,6 +17,7 @@ namespace toDoCharityApp.Models
         [Column(TypeName = "numeric(5, 2)")]
         public decimal Reward { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
         [Column(TypeName = "numeric(5, 2)")]
         public decimal WinCharityPercent { get; set; }
