@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace toDoApp.Repositories {
     public class PostgresRepository<T> : IRepository<T> where T : class {
         private DbContext _context;
-        private DbSet<T> _dbSet;
+        private readonly DbSet<T> _dbSet;
 
         public PostgresRepository(DbContext context) {
             _context = context;

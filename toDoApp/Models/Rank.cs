@@ -14,6 +14,7 @@ namespace toDoApp.Models {
         public int Id { get; set; }
         [Required]
         public string Name;
+        public int Exp { get; set; }
 
         public User User { get; set; }
         public List<PrivilageRank> PrivilageRanks { get; set; }

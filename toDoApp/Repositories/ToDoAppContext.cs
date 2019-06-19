@@ -27,12 +27,13 @@ namespace toDoApp.Repositories {
             GoalCreating(modelBuilder);
             PrivilageRankCreating(modelBuilder);
             ToDoCreating(modelBuilder);
-            UserCreating(modelBuilder);
+            //UserCreating(modelBuilder);
+            RankCreating(modelBuilder);
         }
 
         private void AccountCreating(ModelBuilder modelBuilder) {
-            modelBuilder.Entity<Account>().Property(a => a.Balance).HasDefaultValue(0.00);
-            modelBuilder.Entity<Account>().Property(a => a.Debt).HasDefaultValue(0.00);
+            modelBuilder.Entity<Account>().Property(a => a.MoneySent).HasDefaultValue(0.00);
+            modelBuilder.Entity<Account>().Property(a => a.Exp).HasDefaultValue(0.00);
         }
         private void DonationHistoryCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<DonationHistory>().Property(d => d.Date).HasDefaultValue(DateTime.Now);
@@ -55,8 +56,11 @@ namespace toDoApp.Repositories {
             modelBuilder.Entity<ToDo>().Property(t => t.Completed).HasDefaultValue(false);
         }
 
-        private void UserCreating(ModelBuilder modelBuilder) {
-            //modelBuilder.Entity<User>().Property(u => u.Rank).HasDefaultValue(0);
+        //private void UserCreating(ModelBuilder modelBuilder) {
+        //    //modelBuilder.Entity<User>().Property(u => u.Rank).HasDefaultValue(0);
+        //}
+        private void RankCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<Rank>().Property(r => r.Exp).HasDefaultValue(0);
         }
     }
 }

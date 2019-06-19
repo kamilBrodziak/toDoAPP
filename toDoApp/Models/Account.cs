@@ -13,8 +13,10 @@ namespace toDoApp.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public decimal Balance { get; set; }
-        public decimal Debt { get; set; }
+        [Column("Money_sent", TypeName = "numeric(10, 2)")]
+        public decimal MoneySent { get; set; }
+        [Column(TypeName = "numeric(10, 2)")]
+        public decimal Exp { get; set; }
 
         public int UserId { get; set; }
         public User User { get; set; }
