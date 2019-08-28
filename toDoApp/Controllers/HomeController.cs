@@ -11,6 +11,10 @@ namespace toDoApp.Controllers {
         public IActionResult Index() {
             return View();
         }
+        
+        public IActionResult UserPanel() {
+            return View();
+        }
 
         public IActionResult Privacy() {
             return View();

@@ -1,0 +1,182 @@
+﻿body {
+    overflow: hidden;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 0.5fr 1.5fr 6fr 3.5fr 0.5fr;
+    grid-template-rows: 1fr 4fr 4fr 3fr;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    grid-template-areas: "leftPanel calendar calendar goals slider" "leftPanel calendar calendar goals slider"
+        "leftPanel calendar calendar tasks slider" "leftPanel notes habits tasks slider";
+    width: 100%;
+    height: 100%;
+    background-color: yellow;
+    background-image: url("../img/36448496-light-wood-texture-vector-background.jpg");
+    background-size: cover;
+}
+
+/* COMMON */
+
+.tiles, #slider, #leftPanel {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.95) 0%, rgba(10, 10, 10, 0.95) 10%,
+        rgba(20, 20, 20, 0.98) 50%, rgba(10, 10, 10, 0.95) 90%, rgba(0, 0, 0, 0.95) 100%);
+    /*box-shadow: 10px 10px 30px, -10px -10px 30px;*/
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+/* LEFT PANEL */
+#leftPanel {
+    grid-area: leftPanel;
+    border: groove rgb(31, 31, 31);
+    border-width: 0px 10px 0px 0px;
+    z-index: 101;
+    padding: 0px;
+    display: grid;
+    grid-template-columns: 12fr;
+    grid-template-rows: 7fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: "logo" "facebook" "instagram" "contact" "settings" "logout";
+}
+
+.leftPanelOption {
+    border: groove rgb(31, 31, 31);
+    border-width: 8px 0px 8px 0px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    background-size: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.leftPanelOption:hover {
+    border: groove rgb(71, 71, 71);
+    border-width: 8px 0px 8px 0px;
+}
+
+#facebook {
+    background-image: url("../img/facebook.png");
+}
+
+#facebook:hover {
+    background-image: url("../img/facebookhover.png");
+}
+
+#instagram {
+    background-image: url("../img/instagram.png");
+}
+
+#instagram:hover {
+    background-image: url("../img/instagramhover.png");
+}
+
+#contact {
+    background-image: url("../img/contact.png");
+}
+
+#contact:hover {
+    background-image: url("../img/contactcover.png");
+}
+
+#settings {
+    background-image: url("../img/settings.png");
+}
+
+#settings:hover {
+    background-image: url("../img/settingscover.png");
+}
+
+#logout {
+    background-image: url("../img/logout.png");
+}
+
+#logout:hover {
+    background-image: url("../img/logoutcover.png");
+}
+/* TILES */
+.tiles {
+    border: 10px groove rgb(31, 31, 31);
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.tiles:after {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    content: '';
+    border: 8px groove red;
+    border-top: 0px;
+    border-bottom: 0px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+
+#calendar {
+    grid-area: calendar;
+}
+
+#goals {
+    grid-area: goals;
+}
+
+#notes {
+    grid-area: notes;
+}
+
+#tasks {
+    grid-area: tasks;
+}
+
+#habits {
+    grid-area: habits;
+}
+
+#habits:after {
+    border-color: forestgreen;
+}
+
+#notes:after {
+    border-color: gold;
+}
+
+#goals::after {
+    border-color: blue;
+}
+
+#tasks::after {
+    border-color: purple;
+}
+
+/* SLIDER */
+#slider {
+    grid-area: slider;
+    cursor: pointer;
+    background: linear-gradient(to right, rgba(31, 31, 31, 0) 0%, rgba(21, 21, 21, 0.5) 20%, rgba(11, 11, 11, 0.8 ), rgba(1, 1, 1, 0.9) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#slider:hover {
+    background: linear-gradient(to right, rgba(11, 11, 11, 0.2) 0%, rgba(21, 21, 21, 0.7) 30%, rgba(11, 11, 11, 0.9 ), rgba(1, 1, 1, 0.9) 100%);
+}
+
+#arrowLeft {
+    border: groove silver;
+    border-width: 5px 5px 0px 0px;
+    width: 100%;
+    padding-top: 100%;
+    transform: rotate(45deg) translateX(-20px);
+}
