@@ -1,0 +1,172 @@
+﻿
+.calendarWidget, .calendarTable, .calendarWeekHeaders, .calendarWeeks, .calendarWeekHeader,
+.calendarDaySquare, .calendarHeader, .calendarWidgetHeaderMonthMode,
+.calendarWidgetHeaderDayMode {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.calendarWidget {
+    z-index: 1;
+    width: 90%;
+    padding-left: 5%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 10fr;
+    grid-template-areas: "calendarHeader" "calendarTable";
+}
+
+/*Calendar Header*/
+
+.calendarHeader {
+    z-index: 2;
+    grid-area: calendarHeader;
+    display: grid;
+    grid-template-columns: 11fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "calendarWidgetHeader expandTile";
+    background: linear-gradient(to right, rgba(20, 20, 20, 0.1) 0%, rgba(10, 10, 10, 0.5) 25%, rgba(5, 5, 5, 0.7) 50%, rgba(10, 10, 10, 0.5) 75%, rgba(20, 20, 20, 0.1) 100% );
+    border: 8px groove silver;
+    border-width: 8px 0px 8px 0px;
+    /*border-image-source: linear-gradient(to right, rgba(174, 200, 205, 0) 0%, rgba(174, 200, 205, 0.2) 25%, rgba(174, 200, 205, 0.4) 50%, rgba(174, 200, 205, 0.2) 75%, rgba(174, 200, 205, 0) 100%);*/
+    /*border-image-slice: 1;*/
+    box-sizing: border-box;
+}
+
+.calendarWidgetHeaderMonthMode {
+    grid-area: calendarWidgetHeader;
+    display: grid;
+    grid-template-columns: 1fr 3fr 3fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "calendarHeaderLeftArrow monthHeader yearHeader calendarHeaderRightArrow";
+    grid-column-gap: 2px;
+    color: silver;
+
+}
+.monthHeader, .yearHeader, .dayHeader, .calendarHeaderLeftArrow, .calendarHeaderRightArrow {
+    box-sizing: border-box;
+    border: 6px groove rgb(31, 31, 31);
+    border-width: 4px 10px 10px 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.calendarWidgetHeaderMonthMode div:hover, .calendarWidgetHeaderDayMode div:hover {
+    background-color: rgba(30, 30, 30, 0.4);
+}
+
+.calendarHeaderButtonClicked, .calendarWidgetHeaderMonthMode div:active, .calendarWidgetHeaderDayMode div:active {
+    border-width: 4px 4px 4px 4px;
+}
+
+.calendarWidgetHeaderMonthMode div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Calendar Table*/
+.calendarTable {
+    z-index: 1;
+    grid-area: calendarTable;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: "calendarWeekHeader" "calendarFirstWeek" "calendarSecondWeek" "calendarThirdWeek" "calendarFourthWeek" "calendarFifthWeek";
+    color: silver;
+}
+
+.calendarWeekHeader {
+    color: red;
+    cursor: default;
+    grid-area: calendarWeekHeader;
+    border: 5px groove silver;
+    border-width: 0px 3px 5px 0px;
+    user-select: none;
+}
+
+.calendarWeeks:nth-of-type(2) {
+    grid-area: calendarFirstWeek;
+}
+
+.calendarWeeks:nth-of-type(3) {
+    grid-area: calendarSecondWeek;
+}
+
+.calendarWeeks:nth-of-type(4) {
+    grid-area: calendarThirdWeek;
+}
+
+.calendarWeeks:nth-of-type(5) {
+    grid-area: calendarFourthWeek;
+}
+
+.calendarWeeks:nth-of-type(6) {
+    grid-area: calendarFifthWeek;
+}
+
+.calendarTable div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "firstDay secondDay thirdDay fourthDay fifthDay sixthDay seventhDay";
+}
+
+/*Calendar Day Squares*/
+
+.today {
+    border: 5px groove silver;
+    border-width: 0px 3px 0px 3px;
+    box-sizing: border-box;
+}
+
+.today:hover {
+
+    color: red;
+    cursor: pointer;
+}
+
+.calendarWeeks div, .calendarWeekHeaders {
+    background: linear-gradient(135deg, rgba(60, 60, 60, 0) 45%, rgba(60, 60, 60, 0.2) 50%, rgba(60, 60, 60, 0.4) 70%, rgba(60, 60, 60, 0.6) 90%);
+}
+
+.calendarWeeks div, .calendarWeekHeader div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+.filledDaySquare {
+    transition: all 0.3s ease;
+}
+
+.filledDaySquare:hover {
+    background-color: rgba(70, 70, 70, 0.5);
+    cursor: pointer;
+}
+
+.calendarWeekHeaders:nth-of-type(1), .calendarDaySquare:nth-of-type(1) {
+    grid-area: firstDay;
+}
+.calendarWeekHeaders:nth-of-type(2), .calendarDaySquare:nth-of-type(2) {
+    grid-area: secondDay;
+}
+.calendarWeekHeaders:nth-of-type(3), .calendarDaySquare:nth-of-type(3) {
+    grid-area: thirdDay;
+}
+.calendarWeekHeaders:nth-of-type(4), .calendarDaySquare:nth-of-type(4) {
+    grid-area: fourthDay;
+}
+.calendarWeekHeaders:nth-of-type(5), .calendarDaySquare:nth-of-type(5) {
+    grid-area: fifthDay;
+}
+.calendarWeekHeaders:nth-of-type(6), .calendarDaySquare:nth-of-type(6) {
+    grid-area: sixthDay;
+}
+.calendarWeekHeaders:nth-of-type(7), .calendarDaySquare:nth-of-type(7) {
+    grid-area: seventhDay;
+}

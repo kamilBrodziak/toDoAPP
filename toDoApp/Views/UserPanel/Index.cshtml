@@ -2,6 +2,7 @@
     ViewData["Title"] = "User Panel";
     Layout = "";
 }
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,23 +11,23 @@
     <title>@ViewData["Title"] - To Do App</title>
     <link rel="stylesheet" href="~/css/normalization.css" />
     <link rel="stylesheet" href="~/css/UserPanel.css" />
+    <link rel="stylesheet" href="~/css/calendar.css" />
+
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.0/umd/react.development.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.0/umd/react-dom.development.js"></script>
+    <script src="~/js/calendarWidget.jsx" async></script>
 </head>
 <body>
-    @*<div class="text-center">
-            <h1 class="display-4">Welcome</h1>
-            <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-        </div>*@
     <div class="container">
         <div id="leftPanel">
             <a id="logo" class="leftPanelOption"></a>
             <a id="facebook" class="leftPanelOption"></a>
-            <a id="instagram"class="leftPanelOption"></a>
+            <a id="instagram" class="leftPanelOption"></a>
             <div id="contact" class="leftPanelOption"></div>
             <div id="settings" class="leftPanelOption"></div>
             <div id="logout" class="leftPanelOption"></div>
         </div>
         <div id="calendar" class="tiles">
-            ssssd
         </div>
         <div id="goals" class="tiles"></div>
         <div id="notes" class="tiles"></div>
@@ -36,5 +37,9 @@
             <div id="arrowLeft"></div>
         </div>
     </div>
+    <script src="~/lib/moment.js/moment.min.js"></script>
+
+    @Html.ReactInitJavaScript()
+
 </body>
 </html>
