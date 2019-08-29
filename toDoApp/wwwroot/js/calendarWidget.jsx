@@ -1,86 +1,162 @@
 
-class CalendarHeaderLeftArrow extends React.Component {
-    render() {
-        return (<div className="calendarHeaderLeftArrow"> LeftArrow </div>);
-    }
-}
-class CalendarHeaderDay extends React.Component {
-    render() {
-        return (<div className="dayHeader"> {this.props.day}</div>);
-    }
-}
-class CalendarHeaderMonth extends React.Component {
+//class CalendarHeaderLeftArrow extends React.Component {
+//    render() {
+//        return (<div className="calendarHeaderLeftArrow"> LeftArrow </div>);
+//    }
+//}
+//class CalendarHeaderDay extends React.Component {
+//    render() {
+//        return (<div className="dayHeader"> {this.props.day}</div>);
+//    }
+//}
 
-    render() {
-        return (<div className="monthHeader"> {this.props.month} </div>);
+//class CalendarHeaderMonth extends React.Component {
+
+
+//    render() {
+//        return (<div className="monthHeader" >
+//            {this.props.month}
+//        </div >);
+//    }
+
+//}
+//class CalendarHeaderYear extends React.Component {
+//    render() {
+//        return (<div className="yearHeader"> {this.props.year} </div>);
+//    }
+//}
+//class CalendarHeaderRightArrow extends React.Component {
+//    render() {
+//        return (<div className="calendarHeaderRightArrow"> LeftArrow </div>);
+//    }
+//}
+
+//class CalendarHeader extends React.Component {
+//    render() {
+//        if (this.props.displayMode) {
+//            return (
+//                <div className="calendarWidgetHeaderDayMode">
+//                    <CalendarHeaderLeftArrow />
+//                    <CalendarHeaderDay day={this.props.day}/>
+//                    <CalendarHeaderMonth month={this.props.month}/>
+//                    <CalendarHeaderYear year={this.props.year}/>
+//                    <CalendarHeaderRightArrow />
+//                </div>
+//            );
+//        } else {
+//            return (
+//                <div className="calendarWidgetHeaderMonthMode">
+//                    <CalendarHeaderLeftArrow />
+//                    <CalendarHeaderMonth month={this.props.month}/>
+//                    <CalendarHeaderYear year={this.props.year}/>
+//                    <CalendarHeaderRightArrow />
+//                </div>
+//            );
+//        }
+//    }
+//}
+
+//class CalendarDaySquare extends React.Component {
+//    isToday = (day) => {
+//        return day == this.props.today; 
+//    }
+
+//    render() {
+//        let value = "", className = "calendarDaySquare";
+//        if (isNaN(this.props.value)) {
+//            className = "calendarWeekHeaders";
+//            value = this.props.value;
+//        } else if (this.props.value) {
+//            value = this.props.value;
+//            className += " filledDaySquare";
+//            if (this.isToday(this.props.value)) {
+//                className += " today";
+//            }
+//        }
+//        return (
+//            <div className={className}> {value} </div>    
+//        );
+//    }
+//}
+
+
+//class CalendarHeaderMonthList extends React.Component {
+//    render() {
+//        let months = moment.months();
+//        {
+//            this.state.showMonthTable &&
+//                < this.CalendarHeaderMonthList months={moment.months()} />
+//        }
+//        return (
+//            {
+//                months.map((object, i) =>
+//                    <div>
+
+//                    </div>)
+//            }
+//        );
+//    }
+//}
+
+class CalendarTable extends React.Component {
+    state = {
+        dateObject: moment(),
+        allMonths: moment.months(),
+        showMonthTable: false,
+        showYearTable: false
     }
 
-}
-class CalendarHeaderYear extends React.Component {
-    render() {
-        return (<div className="yearHeader"> {this.props.year} </div>);
+    CalendarDaySquare = props => {
+        let isToday = (props.value == props.today);
+        let value = "", className = "calendarDaySquare";
+        if (isNaN(props.value)) {
+            className = "calendarWeekHeaders";
+            value = props.value;
+        } else if (props.value) {
+            value = props.value;
+            className += " filledDaySquare";
+            if (isToday) {
+                className += " today";
+            }
+        }
+        return (
+            <div className={className}> {value} </div>
+        );
     }
-}
-class CalendarHeaderRightArrow extends React.Component {
-    render() {
-        return (<div className="calendarHeaderRightArrow"> LeftArrow </div>);
-    }
-}
 
-class CalendarHeader extends React.Component {
-    render() {
-        if (this.props.displayMode) {
+    CalendarHeader = props => {
+        if (props.displayMode) {
             return (
                 <div className="calendarWidgetHeaderDayMode">
-                    <CalendarHeaderLeftArrow />
-                    <CalendarHeaderDay day={this.props.day}/>
-                    <CalendarHeaderMonth month={this.props.month}/>
-                    <CalendarHeaderYear year={this.props.year}/>
-                    <CalendarHeaderRightArrow />
+                    <div className="calendarHeaderLeftArrow"> LeftArrow </div>
+                    <div className="dayHeader"> {props.day}</div>
+                    <div className="monthHeader" >{props.month}</div >
+                    <div className="yearHeader"> {props.year} </div>
+                    <div className="calendarHeaderRightArrow"> LeftArrow </div>
                 </div>
             );
         } else {
             return (
                 <div className="calendarWidgetHeaderMonthMode">
-                    <CalendarHeaderLeftArrow />
-                    <CalendarHeaderMonth month={this.props.month}/>
-                    <CalendarHeaderYear year={this.props.year}/>
-                    <CalendarHeaderRightArrow />
+                    <div className="calendarHeaderLeftArrow"> LeftArrow </div>
+                    <div className="monthHeader" >{props.month}</div >
+                    <div className="yearHeader"> {props.year} </div>
+                    <div className="calendarHeaderRightArrow"> LeftArrow </div>
                 </div>
             );
         }
     }
-}
 
-class CalendarDaySquare extends React.Component {
-    isToday = (day) => {
-        return day == this.props.today; 
-    }
-
-    render() {
-        let value = "", className = "calendarDaySquare";
-        if (isNaN(this.props.value)) {
-            className = "calendarWeekHeaders";
-            value = this.props.value;
-        } else if (this.props.value) {
-            value = this.props.value;
-            className += " filledDaySquare";
-            if (this.isToday(this.props.value)) {
-                className += " today";
-            }
+    showMonthTable = (e, month) => {
+        if (!this.state.showMonthTable && showYearTable) {
+            this.setState({
+                showYearTable: false
+            });
         }
-        return (
-            <div className={className}> {value} </div>    
-        );
-    }
-}
-
-class CalendarTable extends React.Component {
-    state = {
-        showMonthTable: false,
-        dateObject: moment(),
-        allMonths: moment.months()
-    }
+        this.setState({
+            showMonthTable: !this.state.showMonthTable,
+        });
+    };
 
     currDay = () => {
         return this.state.dateObject.format("D");
@@ -142,6 +218,11 @@ class CalendarTable extends React.Component {
 
     }
 
+    renderMonthTable() {
+        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    }
+
     renderMonthMode() {
         let weekHeaders = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
         let weeks = this.locateDaysIntoWeeks();
@@ -149,27 +230,27 @@ class CalendarTable extends React.Component {
         return (
             <div className="calendarWidget">
                 <div className="calendarHeader">
-                    <CalendarHeader day={this.currDay()} month={this.currMonth()} year={this.currYear()} />
+                    <this.CalendarHeader day={this.currDay()} month={this.currMonth()} year={this.currYear()} />
                 </div>
                 <div className="calendarTable">
                     <div className="calendarWeekHeader">
-                        {weekHeaders.map((object, i) => <CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
+                        {weekHeaders.map((object, i) => <this.CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
                     </div>
                     <div className="calendarWeeks">
-                        {weeks[0].map((object, i) => <CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
+                        {weeks[0].map((object, i) => <this.CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
 
                     </div>
                     <div className="calendarWeeks">
-                        {weeks[1].map((object, i) => <CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
+                        {weeks[1].map((object, i) => <this.CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
                     </div>
                     <div className="calendarWeeks">
-                        {weeks[2].map((object, i) => <CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
+                        {weeks[2].map((object, i) => <this.CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
                     </div>
                     <div className="calendarWeeks">
-                        {weeks[3].map((object, i) => <CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
+                        {weeks[3].map((object, i) => <this.CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
                     </div>
                     <div className="calendarWeeks">
-                        {weeks[4].map((object, i) => <CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
+                        {weeks[4].map((object, i) => <this.CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
                     </div>
                 </div>
             </div>
