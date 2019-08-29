@@ -74,8 +74,8 @@
     grid-area: calendarTable;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 0.5fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-areas: "calendarWeekHeader" "calendarFirstWeek" "calendarSecondWeek" "calendarThirdWeek" "calendarFourthWeek" "calendarFifthWeek";
+    grid-template-rows: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: "calendarWeekHeader" "calendarFirstWeek" "calendarSecondWeek" "calendarThirdWeek" "calendarFourthWeek" "calendarFifthWeek" "calendarSixthWeek";
     color: silver;
 }
 
@@ -108,6 +108,10 @@
     grid-area: calendarFifthWeek;
 }
 
+.calendarWeeks:nth-of-type(7) {
+    grid-area: calendarSixthWeek;
+}
+
 .calendarTable div {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -117,14 +121,15 @@
 
 /*Calendar Day Squares*/
 
-.today {
+.calendarWeeks div.today {
     border: 5px groove silver;
     border-width: 0px 3px 0px 3px;
     box-sizing: border-box;
+    color: red;
+    font-weight: bolder;
 }
 
 .today:hover {
-
     color: red;
     cursor: pointer;
 }
@@ -169,4 +174,72 @@
 }
 .calendarWeekHeaders:nth-of-type(7), .calendarDaySquare:nth-of-type(7) {
     grid-area: seventhDay;
+}
+
+
+
+.calendarMonthList {
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: "january february" "march april" "may june" "july august" "september october" "november december";
+}
+
+.calendarMonthList div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(150deg, rgba(60, 60, 60, 0) 45%, rgba(60, 60, 60, 0.2) 50%, rgba(60, 60, 60, 0.4) 70%, rgba(60, 60, 60, 0.6) 90%);
+    color: silver;
+    cursor: default;
+    border: 5px groove silver;
+    border-width: 5px 3px 5px 3px;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.calendarMonthList div:hover {
+    cursor: pointer;
+    background-color: rgba(70, 70, 70, 0.5);
+}
+
+.calendarMonthList div.currMonth {
+    border: 5px groove silver;
+    border-width: 3px 10px 3px 10px;
+    font-weight: bolder;
+    color: red;
+}
+
+.calendarYearList {
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+
+.calendarYearList .year {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(150deg, rgba(60, 60, 60, 0) 45%, rgba(60, 60, 60, 0.2) 50%, rgba(60, 60, 60, 0.4) 70%, rgba(60, 60, 60, 0.6) 90%);
+    color: silver;
+    cursor: default;
+    border: 5px groove silver;
+    border-width: 3px 1px 3px 1px;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.calendarYearList div.year:hover {
+    cursor: pointer;
+    background-color: rgba(70, 70, 70, 0.5);
+}
+
+.calendarYearList div.currYear {
+    border: 5px groove silver;
+    border-width: 3px 6px 3px 6px;
+    font-weight: bolder;
+    color: red;
 }

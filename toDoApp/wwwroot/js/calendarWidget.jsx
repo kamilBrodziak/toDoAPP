@@ -1,113 +1,17 @@
-
-//class CalendarHeaderLeftArrow extends React.Component {
-//    render() {
-//        return (<div className="calendarHeaderLeftArrow"> LeftArrow </div>);
-//    }
-//}
-//class CalendarHeaderDay extends React.Component {
-//    render() {
-//        return (<div className="dayHeader"> {this.props.day}</div>);
-//    }
-//}
-
-//class CalendarHeaderMonth extends React.Component {
-
-
-//    render() {
-//        return (<div className="monthHeader" >
-//            {this.props.month}
-//        </div >);
-//    }
-
-//}
-//class CalendarHeaderYear extends React.Component {
-//    render() {
-//        return (<div className="yearHeader"> {this.props.year} </div>);
-//    }
-//}
-//class CalendarHeaderRightArrow extends React.Component {
-//    render() {
-//        return (<div className="calendarHeaderRightArrow"> LeftArrow </div>);
-//    }
-//}
-
-//class CalendarHeader extends React.Component {
-//    render() {
-//        if (this.props.displayMode) {
-//            return (
-//                <div className="calendarWidgetHeaderDayMode">
-//                    <CalendarHeaderLeftArrow />
-//                    <CalendarHeaderDay day={this.props.day}/>
-//                    <CalendarHeaderMonth month={this.props.month}/>
-//                    <CalendarHeaderYear year={this.props.year}/>
-//                    <CalendarHeaderRightArrow />
-//                </div>
-//            );
-//        } else {
-//            return (
-//                <div className="calendarWidgetHeaderMonthMode">
-//                    <CalendarHeaderLeftArrow />
-//                    <CalendarHeaderMonth month={this.props.month}/>
-//                    <CalendarHeaderYear year={this.props.year}/>
-//                    <CalendarHeaderRightArrow />
-//                </div>
-//            );
-//        }
-//    }
-//}
-
-//class CalendarDaySquare extends React.Component {
-//    isToday = (day) => {
-//        return day == this.props.today; 
-//    }
-
-//    render() {
-//        let value = "", className = "calendarDaySquare";
-//        if (isNaN(this.props.value)) {
-//            className = "calendarWeekHeaders";
-//            value = this.props.value;
-//        } else if (this.props.value) {
-//            value = this.props.value;
-//            className += " filledDaySquare";
-//            if (this.isToday(this.props.value)) {
-//                className += " today";
-//            }
-//        }
-//        return (
-//            <div className={className}> {value} </div>    
-//        );
-//    }
-//}
-
-
-//class CalendarHeaderMonthList extends React.Component {
-//    render() {
-//        let months = moment.months();
-//        {
-//            this.state.showMonthTable &&
-//                < this.CalendarHeaderMonthList months={moment.months()} />
-//        }
-//        return (
-//            {
-//                months.map((object, i) =>
-//                    <div>
-
-//                    </div>)
-//            }
-//        );
-//    }
-//}
-
 class CalendarTable extends React.Component {
     state = {
         dateObject: moment(),
-        allMonths: moment.months(),
         showMonthTable: false,
-        showYearTable: false
+        showYearTable: false,
+        displayMonthInCalendar: true,
+        showWeekTable: true,
+        monthList: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        yearList: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],
+        yearListLastActualised: 0
     }
 
     CalendarDaySquare = props => {
-        let isToday = (props.value == props.today);
+        let isToday = (props.value == this.currDay() && this.currMonth() == this.chosenMonth() && this.currYear() == this.chosenYear());
         let value = "", className = "calendarDaySquare";
         if (isNaN(props.value)) {
             className = "calendarWeekHeaders";
@@ -124,49 +28,143 @@ class CalendarTable extends React.Component {
         );
     }
 
-    CalendarHeader = props => {
-        if (props.displayMode) {
+    previousMonth = () => {
+        if (this.chosenMonth() == this.state.monthList[0])
+            this.setYear(parseInt(this.chosenYear()) - 1);
+        this.setMonth(this.state.monthList[(this.state.monthList.indexOf(this.chosenMonth()) + 11) % 12]);
+    }
+
+    nextMonth = () => {
+        this.setMonth(this.state.monthList[(this.state.monthList.indexOf(this.chosenMonth()) + 1) % 12]);
+        if (this.chosenMonth() == this.state.monthList[0]) {
+            this.setYear(parseInt(this.chosenYear()) + 1); 
+        }
+    }
+
+    CalendarHeader = () => {
+        if (!this.state.displayMonthInCalendar) {
             return (
                 <div className="calendarWidgetHeaderDayMode">
-                    <div className="calendarHeaderLeftArrow"> LeftArrow </div>
-                    <div className="dayHeader"> {props.day}</div>
-                    <div className="monthHeader" >{props.month}</div >
-                    <div className="yearHeader"> {props.year} </div>
-                    <div className="calendarHeaderRightArrow"> LeftArrow </div>
+                    <div className="calendarHeaderLeftArrow"><img src="~/img/leftArrow.png" /></div>
+                    <div className="dayHeader"> {this.chosenDay()}</div>
+                    <div className="monthHeader" onClick={e => { this.showMonthTable(); }}>{this.chosenMonth()}</div >
+                    <div className="yearHeader" onClick={e => { this.showYearTable(); }} > { this.chosenYear() } </div>
+                    <div className="calendarHeaderRightArrow"><img src="~/img/rightArrow.png" /></div>
                 </div>
             );
         } else {
             return (
                 <div className="calendarWidgetHeaderMonthMode">
-                    <div className="calendarHeaderLeftArrow"> LeftArrow </div>
-                    <div className="monthHeader" >{props.month}</div >
-                    <div className="yearHeader"> {props.year} </div>
-                    <div className="calendarHeaderRightArrow"> LeftArrow </div>
+                    <div className="calendarHeaderLeftArrow" onClick={e => { this.previousMonth() }}><img src="./img/leftArrow.png" /></div>
+                    <div className="monthHeader" onClick={e => { this.showMonthTable(); }}>{this.chosenMonth()}</div >
+                    <div className="yearHeader" onClick={e => { this.showYearTable(); }}> {this.chosenYear()} </div>
+                    <div className="calendarHeaderRightArrow" onClick={e => { this.nextMonth() }}><img src="./img/rightArrow.png" /></div>
                 </div>
             );
         }
     }
 
-    showMonthTable = (e, month) => {
-        if (!this.state.showMonthTable && showYearTable) {
-            this.setState({
-                showYearTable: false
-            });
-        }
+    CalendarMonthList = () => {
+
+        return (
+            <div className="calendarMonthList">
+                {this.state.monthList.map((month, i) => {
+                    let currMonthClass = "";
+                    if (this.currYear() == this.chosenYear() && this.currMonth() == month) {
+                        currMonthClass = " currMonth";
+                    }
+
+                    return <div key={i} className={month + "Month" + currMonthClass} onClick={e => { this.setMonth(month); }}>{month}</div>
+                })}
+                }
+            </div>
+            );
+    }
+
+    setMonth = month => {
         this.setState({
-            showMonthTable: !this.state.showMonthTable,
-        });
+            dateObject: this.state.dateObject.month(month),
+            showMonthTable: false,
+            showWeekTable: true
+        })
+    }
+
+    showMonthTable = (e) => {
+        this.setState({
+            showYearTable: false,
+            showWeekTable: (this.state.showMonthTable) ? true : false,
+            showMonthTable: !this.state.showMonthTable
+
+        })
     };
 
+    setYear = year => {
+        this.setState({
+            dateObject: this.state.dateObject.year(year),
+            showYearTable: false,
+            showWeekTable: true
+        })
+    }
+
+    showYearTable = (e) => {
+        this.setState({
+            showMonthTable: false,
+            showWeekTable: (this.state.showYearTable) ? true : false,
+            showYearTable: !this.state.showYearTable
+        })
+    }
+
+    setYearList = () => {
+        if (this.state.yearListLastActualised != this.currYear()) {
+            let yearList = [];
+            for (let i = parseInt(this.currYear()) - 6; i < parseInt(this.currYear()) + 30; ++i) {
+                yearList.push(i);
+            }
+            this.setState({
+                yearList: yearList,
+                yearListLastActualised: this.currYear()
+            })
+        }
+    }
+
+    CalendarYearList = () => {
+        this.setYearList();
+        let yearList = this.state.yearList;
+        return (
+            <div className="calendarYearList">
+                {yearList.map((year, i) => {
+                    let currYearClass = "";
+                    if (this.currYear() == year) {
+                        currYearClass = " currYear";
+                    }
+
+                    return <div key={i} className={"year" + currYearClass}  onClick={e => { this.setYear(year); }}>{year}</div>
+                })}
+            </div>
+        );
+    }
+
     currDay = () => {
-        return this.state.dateObject.format("D");
+        return moment().format("D");
     };
 
     currMonth = () => {
-        return this.state.dateObject.format("MMMM");
+        return moment().format("MMMM");
     };
 
     currYear = () => {
+        return moment().format("YYYY");
+    }
+
+    chosenDay = () => {
+        return this.state.dateObject.format("D");
+    };
+
+    chosenMonth = () => {
+        return this.state.dateObject.format("MMMM");
+    };
+
+    chosenYear = () => {
         return this.state.dateObject.format("YYYY");
     }
 
@@ -178,7 +176,7 @@ class CalendarTable extends React.Component {
         let dateObject = this.state.dateObject;
         let firstDay = moment(dateObject)
             .startOf("month")
-            .format("d"); // Day of week 0...1..5...6
+            .format("d");
         return firstDay;
     };
 
@@ -188,7 +186,12 @@ class CalendarTable extends React.Component {
         let thirdWeek = [];
         let fourthWeek = [];
         let fifthWeek = [];
-        for (let i = 0; i < this.firstDayOfMonth() - 1; ++i) {
+        let sixthWeek = [];
+        let firstDayOfMonth = this.firstDayOfMonth();
+        if (firstDayOfMonth == 0) {
+            firstDayOfMonth = 7;
+        }
+        for (let i = 0; i < firstDayOfMonth - 1; ++i) {
             firstWeek.push(0);
         }
         let j = 1;
@@ -205,54 +208,67 @@ class CalendarTable extends React.Component {
         for (; j <= this.daysInMonth() && fourthWeek.length < 7; ++j) {
             fourthWeek.push(j);
         }
-        for (; j <= this.daysInMonth(); ++j) {
+        for (; j <= this.daysInMonth() && fifthWeek.length < 7; ++j) {
             fifthWeek.push(j);
         }
-        for (; fifthWeek.length < 7;) {
+        for (; fifthWeek.length < 7;++j) {
             fifthWeek.push(0);
         }
-        return [firstWeek, secondWeek, thirdWeek, fourthWeek, fifthWeek];
+
+        for (; j <= this.daysInMonth(); ++j) {
+            sixthWeek.push(j);
+        }
+
+        for (; sixthWeek.length < 7;) {
+            sixthWeek.push(0);
+        }
+        return [firstWeek, secondWeek, thirdWeek, fourthWeek, fifthWeek, sixthWeek];
     }
 
     renderDayMode() {
 
     }
 
-    renderMonthTable() {
-        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-    }
-
     renderMonthMode() {
         let weekHeaders = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
         let weeks = this.locateDaysIntoWeeks();
-
+        
         return (
             <div className="calendarWidget">
-                <div className="calendarHeader">
-                    <this.CalendarHeader day={this.currDay()} month={this.currMonth()} year={this.currYear()} />
-                </div>
-                <div className="calendarTable">
-                    <div className="calendarWeekHeader">
-                        {weekHeaders.map((object, i) => <this.CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
-                    </div>
-                    <div className="calendarWeeks">
-                        {weeks[0].map((object, i) => <this.CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
 
-                    </div>
-                    <div className="calendarWeeks">
-                        {weeks[1].map((object, i) => <this.CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
-                    </div>
-                    <div className="calendarWeeks">
-                        {weeks[2].map((object, i) => <this.CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
-                    </div>
-                    <div className="calendarWeeks">
-                        {weeks[3].map((object, i) => <this.CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
-                    </div>
-                    <div className="calendarWeeks">
-                        {weeks[4].map((object, i) => <this.CalendarDaySquare value={object} key={i} today={this.currDay()} />)}
-                    </div>
+                <div className="calendarHeader">
+                    <this.CalendarHeader />
                 </div>
+                {this.state.showMonthTable && (<this.CalendarMonthList />)}
+                {this.state.showYearTable && (<this.CalendarYearList />)}
+
+                {
+                    this.state.showWeekTable && (
+                    <div className="calendarTable">
+                        <div className="calendarWeekHeader">
+                            {weekHeaders.map((object, i) => <this.CalendarDaySquare value={object} key={i} />)}
+                        </div>
+                        <div className="calendarWeeks">
+                            {weeks[0].map((object, i) => <this.CalendarDaySquare value={object} key={i} />)}
+
+                        </div>
+                        <div className="calendarWeeks">
+                            {weeks[1].map((object, i) => <this.CalendarDaySquare value={object} key={i} />)}
+                        </div>
+                        <div className="calendarWeeks">
+                            {weeks[2].map((object, i) => <this.CalendarDaySquare value={object} key={i} />)}
+                        </div>
+                        <div className="calendarWeeks">
+                            {weeks[3].map((object, i) => <this.CalendarDaySquare value={object} key={i} />)}
+                        </div>
+                        <div className="calendarWeeks">
+                            {weeks[4].map((object, i) => <this.CalendarDaySquare value={object} key={i} />)}
+                            </div>
+                        <div className="calendarWeeks">
+                            {weeks[5].map((object, i) => <this.CalendarDaySquare value={object} key={i} />)}
+                        </div>
+                    </div>
+                )}
             </div>
         );
     }
@@ -278,7 +294,12 @@ class Calendar extends React.Component {
 }
 
 // ========================================
+
+function App() {
+    return <Calendar />;
+}
+
+const rootElement = document.getElementById("calendar");
 ReactDOM.render(
-    <Calendar />,
-    document.getElementById('calendar')
+    <App />, rootElement
 );

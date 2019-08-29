@@ -1,4 +1,6 @@
-﻿@{
+﻿@using React.AspNet
+
+@{
     ViewData["Title"] = "User Panel";
     Layout = "";
 }
@@ -12,10 +14,6 @@
     <link rel="stylesheet" href="~/css/normalization.css" />
     <link rel="stylesheet" href="~/css/UserPanel.css" />
     <link rel="stylesheet" href="~/css/calendar.css" />
-
-    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.0/umd/react.development.js"></script>
-    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.0/umd/react-dom.development.js"></script>
-    <script src="~/js/calendarWidget.jsx" async></script>
 </head>
 <body>
     <div class="container">
@@ -37,8 +35,10 @@
             <div id="arrowLeft"></div>
         </div>
     </div>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.0/umd/react.development.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.0/umd/react-dom.development.js"></script>
     <script src="~/lib/moment.js/moment.min.js"></script>
-
+    <script src="~/js/calendarWidget.jsx"></script>
     @Html.ReactInitJavaScript()
 
 </body>

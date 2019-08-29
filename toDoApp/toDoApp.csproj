@@ -5,6 +5,10 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\js\calendarWidget.jsx" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore" Version="3.1.7" />
