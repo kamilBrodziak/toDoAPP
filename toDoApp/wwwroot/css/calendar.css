@@ -35,16 +35,24 @@
     box-sizing: border-box;
 }
 
-.calendarWidgetHeaderMonthMode {
+.calendarWidgetHeaderMonthMode, .calendarWidgetHeaderDayMode {
     grid-area: calendarWidgetHeader;
     display: grid;
-    grid-template-columns: 1fr 3fr 3fr 1fr;
     grid-template-rows: 1fr;
-    grid-template-areas: "calendarHeaderLeftArrow monthHeader yearHeader calendarHeaderRightArrow";
     grid-column-gap: 2px;
     color: silver;
-
 }
+
+.calendarWidgetHeaderMonthMode {
+    grid-template-columns: 1fr 3fr 3fr 1fr;
+    grid-template-areas: "calendarHeaderLeftArrow monthHeader yearHeader calendarHeaderRightArrow";
+}
+
+.calendarWidgetHeaderDayMode {
+    grid-template-columns: 1fr 3fr 3fr 3fr 1fr;
+    grid-template-areas: "calendarHeaderLeftArrow dayHeader monthHeader yearHeader calendarHeaderRightArrow";
+}
+
 .monthHeader, .yearHeader, .dayHeader, .calendarHeaderLeftArrow, .calendarHeaderRightArrow {
     box-sizing: border-box;
     border: 6px groove rgb(31, 31, 31);
@@ -62,13 +70,19 @@
     border-width: 4px 4px 4px 4px;
 }
 
-.calendarWidgetHeaderMonthMode div {
+.calendarWidgetHeaderMonthMode div, .calendarWidgetHeaderDayMode div {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/*Calendar Table*/
+/*Calendar Day Table*/
+.calendarDayTable {
+    z-index: 1;
+    grid-area: calendarTable;
+}
+
+/*Calendar Month Table*/
 .calendarTable {
     z-index: 1;
     grid-area: calendarTable;
