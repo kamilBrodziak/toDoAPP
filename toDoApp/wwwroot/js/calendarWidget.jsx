@@ -31,10 +31,12 @@ class CalendarTable extends React.Component {
         );
     }
 
+
     previousMonth = () => {
         if (this.chosenMonth() == this.state.monthList[0])
             this.setYear(parseInt(this.chosenYear()) - 1);
         this.setMonth(this.state.monthList[(this.state.monthList.indexOf(this.chosenMonth()) + 11) % 12]);
+        this.showDefaultTable();
     }
 
     nextMonth = () => {
@@ -42,6 +44,7 @@ class CalendarTable extends React.Component {
         if (this.chosenMonth() == this.state.monthList[0]) {
             this.setYear(parseInt(this.chosenYear()) + 1); 
         }
+        this.showDefaultTable();
     }
 
     previousDay = () => {
@@ -52,6 +55,7 @@ class CalendarTable extends React.Component {
         } else {
             this.setDay(previousDay);
         }
+        this.showDefaultTable();
     }
 
     nextDay = () => {
@@ -61,6 +65,7 @@ class CalendarTable extends React.Component {
             this.nextMonth();
         }
         this.setDay(day);
+        this.showDefaultTable();
     }
 
     CalendarHeader = () => {
@@ -117,6 +122,14 @@ class CalendarTable extends React.Component {
             showMonthTable: false,
             showDefaultTable: true
         })
+    }
+
+    showDefaultTable = () => {
+        this.setState({
+            showDefaultTable: true,
+            showYearTable: false,
+            showMonthTable: false
+        });
     }
 
     showMonthTable = (e) => {
@@ -204,12 +217,17 @@ class CalendarTable extends React.Component {
         return this.state.dateObject.format("YYYY");
     }
 
+    chosenWeekdayName = () => {
+        return this.state.dateObject.format('dddd');
+    }
+
     daysInMonth = () => {
         return this.state.dateObject.daysInMonth();
     };
 
     firstDayOfMonth = () => {
         let dateObject = this.state.dateObject;
+        
         let firstDay = moment(dateObject)
             .startOf("month")
             .format("d");
@@ -261,13 +279,20 @@ class CalendarTable extends React.Component {
         return [firstWeek, secondWeek, thirdWeek, fourthWeek, fifthWeek, sixthWeek];
     }
 
-    renderDayMode() {
-
-    }
-
-    DayMode() {
+    DayMode = () => {
         return (
             <div className="calendarDayTable">
+                <div className="calendarWeekdayNameHeader">{this.chosenWeekdayName()}</div>
+                <div className="calendarDay">
+                    <div className="calendarDayEventTable">
+                        <div className="calendarDayEventsHeader">Events</div>
+                        <div className="calendarDayEvents"></div>
+                    </div>
+                    <div className="calendarDayTaskTable">
+                        <div className="calendarDayTasksHeader">Tasks</div>
+                        <div className="calendarDayTasks"></div>
+                    </div>
+                </div>
             </div>
             );
     }
@@ -315,33 +340,11 @@ class CalendarTable extends React.Component {
                 {this.state.showYearTable && (<this.CalendarYearList />)}
                 {this.state.showDefaultTable && ((this.state.displayMode) ? <this.MonthMode /> : <this.DayMode />)}
             </div>
-        );
-        //if (this.props.displayMode) {
-        //    return this.renderDayMode();
-        //} else {
-        //    return this.renderMonthMode();
-        //}
-        
+        );        
     }
-}
-
-class Calendar extends React.Component {
-    displayMode = 0; // 0 - month display, 1 - day display
-
-    render() {
-        return (
-                <CalendarTable displayMode={this.displayMode} />
-        );
-    }
-}
-
-// ========================================
-
-function App() {
-    return <Calendar />;
 }
 
 const rootElement = document.getElementById("calendar");
 ReactDOM.render(
-    <App />, rootElement
+    <CalendarTable />, rootElement
 );

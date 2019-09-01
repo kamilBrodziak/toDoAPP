@@ -30,8 +30,6 @@
     background: linear-gradient(to right, rgba(20, 20, 20, 0.1) 0%, rgba(10, 10, 10, 0.5) 25%, rgba(5, 5, 5, 0.7) 50%, rgba(10, 10, 10, 0.5) 75%, rgba(20, 20, 20, 0.1) 100% );
     border: 8px groove silver;
     border-width: 8px 0px 8px 0px;
-    /*border-image-source: linear-gradient(to right, rgba(174, 200, 205, 0) 0%, rgba(174, 200, 205, 0.2) 25%, rgba(174, 200, 205, 0.4) 50%, rgba(174, 200, 205, 0.2) 75%, rgba(174, 200, 205, 0) 100%);*/
-    /*border-image-slice: 1;*/
     box-sizing: border-box;
 }
 
@@ -80,8 +78,43 @@
 .calendarDayTable {
     z-index: 1;
     grid-area: calendarTable;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 11fr;
+    grid-template-areas: "calendarWeekdayNameHeader" "calendarDay";
 }
 
+.calendarWeekdayNameHeader, .calendarDayEventsHeader, .calendarDayTasksHeader {
+    background: linear-gradient(135deg, rgba(60, 60, 60, 0) 45%, rgba(60, 60, 60, 0.2) 50%, rgba(60, 60, 60, 0.4) 70%, rgba(60, 60, 60, 0.6) 90%);
+    color: silver;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 0px groove silver;
+    border-bottom-width: 4px;
+}
+
+.calendarDay {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 4fr 8fr;
+    grid-template-areas: "calendarDayEventTable" "calendarDayTaskTable";
+}
+
+.calendarDayEventTable {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 11fr;
+    grid-template-areas: "calendarDayEventsHeader", "calendarDayTasksHeader";
+}
+
+.calendarDayTaskTable {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 11fr;
+    grid-template-areas: "calendarDayTasksHeader", "calendarDayTasks";
+}
 /*Calendar Month Table*/
 .calendarTable {
     z-index: 1;
@@ -98,8 +131,9 @@
     cursor: default;
     grid-area: calendarWeekHeader;
     border: 5px groove silver;
-    border-width: 0px 3px 5px 0px;
+    border-width: 0px 0px 5px 0px;
     user-select: none;
+    box-sizing: border-box;
 }
 
 .calendarWeeks:nth-of-type(2) {
