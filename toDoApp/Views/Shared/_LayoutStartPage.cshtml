@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/normalization.css" />
+    <link rel="stylesheet" href="~/css/index.css" />
+</head>
+<body>
+    <div id="container">
+        <nav id="homeNav">
+            <ul>
+                <li><a id="logoNav">Logo</a></li>
+                <li class="activeNav"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a>About</a></li>
+                <li><a>Contact</a></li>
+                <li id="loginNavButton"><a>Login</a></li>
+                <li id="registerNavButton"><a>Register</a></li>
+            </ul>
+        </nav>
+        <main id="content">
+            @RenderBody()
+        </main>
+        <footer>
+
+        </footer>
+    </div>
+</body>
+</html>
