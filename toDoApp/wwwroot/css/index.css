@@ -36,9 +36,15 @@
 }
 
 .activeNav {
-    /*box-sizing: border-box;
-    border: 2px groove silver;
-    border-width: 0 10px 2px 0;*/
+    box-sizing: border-box;
+    border: 2px solid silver !important;
+    border-width: 0 6px 2px 0 !important;
+    /*box-shadow: inset -7px 0px 10px rgba(250, 250, 250, 0.9);*/
+}
+
+.activeNav a {
+    padding-left: 3px;
+    font-weight: bolder;
 }
 
 #homeNav ul li a {

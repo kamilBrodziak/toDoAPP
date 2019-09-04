@@ -6,17 +6,18 @@
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/css/normalization.css" />
     <link rel="stylesheet" href="~/css/index.css" />
+    @RenderSection("Styles", required: false)
 </head>
 <body>
     <div id="container">
         <nav id="homeNav">
             <ul>
                 <li><a id="logoNav">Logo</a></li>
-                <li class="activeNav"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="@(ViewBag.Current == "home" ? "activeNav" : "")"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                 <li><a>About</a></li>
                 <li><a>Contact</a></li>
-                <li id="loginNavButton"><a>Login</a></li>
-                <li id="registerNavButton"><a>Register</a></li>
+                <li id="loginNavButton" class="@(ViewBag.Current == "login" ? "activeNav" : "")"><a asp-area="" asp-controller="Home" asp-action="Login">Login</a></li>
+                <li id="registerNavButton" class="@(ViewBag.Current == "register" ? "activeNav" : "")"><a asp-area="" asp-controller="Home" asp-action="Register">Register</a></li>
             </ul>
         </nav>
         <main id="content">
